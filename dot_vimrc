@@ -1,0 +1,134 @@
+" ------------------------------------------------------------------------------
+" Plugins will be downloaded under the specified directory.
+call plug#begin('~/.vim/plugged')
+
+Plug 'tpope/vim-sensible'       " Sensible defaults
+Plug 'tpope/vim-fugitive'       " Awesome Git Integration in Vim
+Plug 'tpope/vim-repeat'         " Better Plugin integration with '.' repeating
+Plug 'tpope/vim-surround'       " Work with surrounds: hat -> 'hat' etc
+Plug 'tpope/vim-speeddating'    " Increment dates and times: Ctrl-a/Ctrl-x
+Plug 'tpope/vim-characterize'   " Unicde character metadata
+Plug 'tpope/vim-unimpaired'     " Nifty bracket mappings: [<space>, etc
+Plug 'tpope/vim-vinegar'        " Better netrw experience: - = go up, etc
+Plug 'ctrlpvim/ctrlp.vim'       " Fuzzy finder for vim - mapped to Ctrl-p
+Plug 'SirVer/ultisnips'         " Snippets
+Plug 'scrooloose/nerdcommenter' " Commenting features
+
+" Easy Align
+Plug 'junegunn/vim-easy-align'  " Decent alignment plugin
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" Vim Language Syntax
+Plug 'glench/vim-jinja2-syntax'
+Plug 'sheerun/vim-polyglot'
+Plug 'lervag/vimtex'
+let g:vimtex_view_method = 'zathura'
+
+" Vim tmux integration
+Plug 'preservim/vimux'
+Plug 'christoomey/vim-tmux-navigator'
+" Write all buffers before navigating from Vim to tmux pane
+let g:tmux_navigator_save_on_switch = 2
+
+" Vim theming
+Plug 'vim-airline/vim-airline' " airline
+Plug 'ryanoasis/vim-devicons'  " nice icons
+Plug 'whatyouhide/vim-gotham'  " Dark Colorscheme
+Plug 'yggdroot/indentline'     " Display thin vertical lines at indent levels
+Plug 'airblade/vim-gitgutter'  " Display git change markers in gutter
+
+" Will try language server integration again later...
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+" ------------------------------------------------------------------------------
+" ------------------------------------------------------------------------------
+" Basic Settings...
+
+" Always work with utf-8
+set encoding=utf-8
+
+" more natural split focus
+set splitbelow
+set splitright
+
+set nowrap
+
+" Tab controls for sane people...
+set tabstop=4     " set \t character display width
+set shiftwidth=4  " set indent width
+set softtabstop=0 " set # of columns for a TAB
+set expandtab     " set to expand tabs to spaces
+set smarttab      " smart tabs at beginning of lines
+
+set clipboard=unnamed
+set mouse=a
+
+autocmd BufWritePre * %s/\s\+$//e
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+noremap <leader>b :ls<cr>:b<space>
+
+
+" ------------------------------------------------------------------------------
+" Theming again...
+
+" Maybe a separate theme file sometime?
+" source $HOME/.theme_vim
+colorscheme gotham
+
+" -- turn on col 80 indicator and number all lines
+set colorcolumn=80
+set number
+
+" -- turn off background so if I have one set in my terminal or the desktop
+"    it can show through
+hi! Normal guibg=NONE ctermbg=NONE
+hi! NonText ctermbg=none
+
+" -- basic airline setup, but works for me...
+let g:airline_section_z = '%#__accent_bold#%l/%L:%v'
+
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'V'  : 'V',
+      \ '^V' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '^S' : 'S',
+      \ 't'  : 'T',
+      \ }
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = 'Ɇ'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+
+" ------------------------------------------------------------------------------
+
