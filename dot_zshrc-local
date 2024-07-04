@@ -1,0 +1,14 @@
+
+# specific to when my username is 'david'
+path+=('/home/david/.local/bin')
+
+
+alias change_background='feh -r --randomize --no-fehbg --bg-fill $HOME/.wallpaper/active/*'
+alias cbg='feh -r --randomize --no-fehbg --bg-fill $HOME/.wallpaper/active/*'
+
+
+#-------------------------------------------------------------------------------
+# Games
+alias FTB='~/FTBA/FTBApp'
+
+
