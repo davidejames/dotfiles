@@ -113,7 +113,14 @@ alias vpnst='vpnstat'
 alias update='sudo apt-get -y update; sudo apt-get -y upgrade'
 
 #-------------------------------------------------------------------------------
+# Generally Useful Aliases
+#   note - some of these are provided by plugins above, but those
+#   versions do not sort directories first, so I'm re-defining them here
+alias l='ls --group-directories-first'
+alias ll='ls -l --group-directories-first'
+alias la='ls -al --group-directories-first'
 
+#-------------------------------------------------------------------------------
 export CALIBRE_USE_DARK_PALETTE=1
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
