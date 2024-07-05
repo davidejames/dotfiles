@@ -63,7 +63,7 @@ set softtabstop=0 " set # of columns for a TAB
 set expandtab     " set to expand tabs to spaces
 set smarttab      " smart tabs at beginning of lines
 
-set clipboard=unnamed
+set clipboard=unnamedplus
 set mouse=a
 
 autocmd BufWritePre * %s/\s\+$//e
