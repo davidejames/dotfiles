@@ -15,11 +15,11 @@ Plug 'tpope/vim-repeat'         " Better Plugin integration with '.' repeating
 Plug 'tpope/vim-surround'       " Work with surrounds: hat -> 'hat' etc
 Plug 'tpope/vim-speeddating'    " Increment dates and times: Ctrl-a/Ctrl-x
 Plug 'tpope/vim-characterize'   " Unicde character metadata
+Plug 'tpope/vim-commentary'     " Comment stuff
 Plug 'tpope/vim-unimpaired'     " Nifty bracket mappings: [<space>, etc
 Plug 'tpope/vim-vinegar'        " Better netrw experience: - = go up, etc
 Plug 'ctrlpvim/ctrlp.vim'       " Fuzzy finder for vim - mapped to Ctrl-p
 Plug 'SirVer/ultisnips'         " Snippets
-Plug 'scrooloose/nerdcommenter' " Commenting features
 
 " Easy Align
 Plug 'junegunn/vim-easy-align'  " Decent alignment plugin
