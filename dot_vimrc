@@ -3,8 +3,10 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'vimwiki/vimwiki'          " Vim Wiki
-Plug 'tbabej/taskwiki'
-Plug 'vim-scripts/AnsiEsc'
+Plug 'tbabej/taskwiki'          " Taskwarrior integration with Vim Wiki
+Plug 'vim-scripts/AnsiEsc.vim'  " Better colors with some detailed views
+Plug 'itchyny/calendar.vim'     " Calendar with task integration
+                                "   still not sure about this one
 
 Plug 'tpope/vim-sensible'       " Sensible defaults
 Plug 'tpope/vim-fugitive'       " Awesome Git Integration in Vim
