@@ -3,6 +3,8 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'vimwiki/vimwiki'          " Vim Wiki
+Plug 'tbabej/taskwiki'
+Plug 'vim-scripts/AnsiEsc'
 
 Plug 'tpope/vim-sensible'       " Sensible defaults
 Plug 'tpope/vim-fugitive'       " Awesome Git Integration in Vim
