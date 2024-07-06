@@ -3,11 +3,11 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'vimwiki/vimwiki'          " Vim Wiki
-Plug 'tbabej/taskwiki'          " Taskwarrior integration with Vim Wiki
-Plug 'vim-scripts/AnsiEsc.vim'  " Better colors with some detailed views
-Plug 'itchyny/calendar.vim'     " Calendar with task integration
+" Plug 'tbabej/taskwiki'          " Taskwarrior integration with Vim Wiki
+" Plug 'vim-scripts/AnsiEsc.vim'  " Better colors with some detailed views
+" Plug 'itchyny/calendar.vim'     " Calendar with task integration
                                 "   still not sure about this one
-Plug 'blindFS/vim-taskwarrior'  " More integration with Task Warrior
+" Plug 'blindFS/vim-taskwarrior'  " More integration with Task Warrior
 
 Plug 'tpope/vim-sensible'       " Sensible defaults
 Plug 'tpope/vim-fugitive'       " Awesome Git Integration in Vim
@@ -73,14 +73,21 @@ set smarttab      " smart tabs at beginning of lines
 set clipboard=unnamedplus
 set mouse=a
 
+" Normalize tabs on save
 autocmd BufWritePre * %s/\s\+$//e
+
+" Yaml sane indents (yaml typically has a lot of indent levels)
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+" Override vimwiki's takeover of vim-vinegar's '-' mapping
+autocmd BufEnter * silent! unmap <buffer>-
 
+" Fast buffer navigation
 noremap <leader>b :ls<cr>:b<space>
 
+" ctrl-p vim
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 " ------------------------------------------------------------------------------
 " Theming again...
