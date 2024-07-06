@@ -3,11 +3,11 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'vimwiki/vimwiki'          " Vim Wiki
-" Plug 'tbabej/taskwiki'          " Taskwarrior integration with Vim Wiki
-" Plug 'vim-scripts/AnsiEsc.vim'  " Better colors with some detailed views
-" Plug 'itchyny/calendar.vim'     " Calendar with task integration
+Plug 'tbabej/taskwiki'          " Taskwarrior integration with Vim Wiki
+Plug 'vim-scripts/AnsiEsc.vim'  " Better colors with some detailed views
+Plug 'itchyny/calendar.vim'     " Calendar with task integration
                                 "   still not sure about this one
-" Plug 'blindFS/vim-taskwarrior'  " More integration with Task Warrior
+Plug 'blindFS/vim-taskwarrior'  " More integration with Task Warrior
 
 Plug 'tpope/vim-sensible'       " Sensible defaults
 Plug 'tpope/vim-fugitive'       " Awesome Git Integration in Vim
@@ -88,6 +88,10 @@ noremap <leader>b :ls<cr>:b<space>
 " ctrl-p vim
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" Vim Wiki git sync
+au BufReadPre   ~/vimwiki/* !cd ~/vimwiki;git pull
+au BufWritePost ~/vimwiki/* !cd ~/vimwiki;git commit -a -m "sync";git push
 
 " ------------------------------------------------------------------------------
 " Theming again...
