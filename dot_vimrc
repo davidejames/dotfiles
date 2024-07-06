@@ -2,6 +2,8 @@
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 
+Plug 'vimwiki/vimwiki'          " Vim Wiki
+
 Plug 'tpope/vim-sensible'       " Sensible defaults
 Plug 'tpope/vim-fugitive'       " Awesome Git Integration in Vim
 Plug 'tpope/vim-repeat'         " Better Plugin integration with '.' repeating
