@@ -90,9 +90,15 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " Vim Wiki git sync
-au BufReadPre   ~/vimwiki/* !cd ~/vimwiki;git pull
-au BufWritePost ~/vimwiki/* !cd ~/vimwiki;git commit -a -m "sync";git push
+au BufReadPre   ~/vimwiki/index.md !cd ~/vimwiki/;git pull
+au BufWritePost ~/vimwiki/*  !git add .;git commit -m "sync";git push
 
+" Use markdown for Vim Wiki
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': 'md'}]
+
+" don't treat other markdown files as wiki pages:
+let g:vimwiki_global_ext = 0
 " ------------------------------------------------------------------------------
 " Theming again...
 
