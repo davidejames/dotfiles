@@ -1,77 +1,12 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 
-#-------------------------------------------------------------------------------
-source /usr/share/zsh-antigen/antigen.zsh
-antigen use oh-my-zsh
+# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
+antidote load
 
-antigen bundle common-aliases
-  # l, la, etc...
-  # full list:
-  #    https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/common-aliases
-
-antigen bundle git
-
-antigen bundle jeffreytse/zsh-vi-mode
-  # AWESOME vi mode for terminal
-
-antigen bundle command-not-found
-  # when a command is not recognized, it will suggest packages to install
-  #  that implement the command
-
-antigen bundle colorize
-  # adds `ccat` and `cless` -> print files with syntax coloring
-
-antigen bundle copybuffer
-  # use `ctrl-o` to copy current command to system clipboard
-
-antigen bundle copypath
-  # adds `copypath` absolute path to cwd -> clipboard
-
-antigen bundle copyfile
-  # adds `copyfile` file contents -> clipboard
-
-antigen bundle direnv
-  # hooks `direnv`
-  #   allows an `.envrc` or `.env` file in current and parent dirs
-  #   see: `direnv.net` for details
-
-antigen bundle rust
-  # adds completion for `rustc`, `rustup`, `cargo`
-
-antigen bundle safe-paste
-  # prevents code from being run just by pasting it
-
-antigen bundle sudo
-  # press `esc` twice to prefix previous command with `sudo`
-
-antigen bundle zsh-interactive-cd
-  # uses `fzf` (fuzzy finder) to interactively list directories
-
-antigen bundle desyncr/auto-ls
-  # adds an automatic 'ls' command after every directory change
-
-antigen bundle zsh-users/zsh-syntax-highlighting
-  # syntax highlighting of shell commands
-
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-autosuggestions
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
-antigen bundle supercrabtree/k
-antigen bundle babarot/enhancd
-
-antigen apply
+autoload -Uz promptinit && promptinit && prompt powerlevel10k
 #-------------------------------------------------------------------------------
 
-# enable oh-my-zsh
-export ZSH="$HOME/.oh-my-zsh"
-source $ZSH/oh-my-zsh.sh
 
 #-----------------------------------------------------------------------
 # Dot Net
@@ -97,38 +32,48 @@ _dotnet_zsh_complete()
 compdef _dotnet_zsh_complete dotnet
 #-----------------------------------------------------------------------
 
-#-----------------------------------------------------------------------
-# VPN Control
-#
-alias vpnc='sudo protonvpn c --cc US'
-alias vpns='sudo protonvpn c --sc'
-alias vpnd='sudo protonvpn d'
-alias vpnstat='protonvpn s'
-alias vpnst='vpnstat'
-
-#-----------------------------------------------------------------------
-
-#-------------------------------------------------------------------------------
-# Some useful aliases on my main machine
-alias update='sudo apt-get -y update; sudo apt-get -y upgrade'
-
-#-------------------------------------------------------------------------------
-# Generally Useful Aliases
-#   note - some of these are provided by plugins above, but those
-#   versions do not sort directories first, so I'm re-defining them here
-alias l='ls --group-directories-first'
-alias ll='ls -l --group-directories-first'
-alias la='ls -al --group-directories-first'
-
-#-------------------------------------------------------------------------------
-export CALIBRE_USE_DARK_PALETTE=1
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 source ~/.zshrc-local
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# zsh-vi-ode will overwrite some commands, sowe need to have it allow other
+# inits after it is done:
+# per: https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
+function my_init() {
+    # init FZF:
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+    # -- use fd instead of default find
+    export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+    _fzf_compgen_path() {
+        fd --hidden --exclude .git . "$1"
+    }
+
+    _fzf_compgen_dir() {
+        fd --type=d --hidden --exclude .git . "$1"
+    }
+
+    source ~/fzf-git.sh/fzf-git.sh
+}
+zvm_after_init_commands+=(my_init)
+
+if command -v zoxide > /dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
+function init_lazyman() {
+    # Source the Lazyman shell initialization for aliases and nvims selector
+    # shellcheck source=.config/nvim-Lazyman/.lazymanrc
+    [ -f ~/.config/nvim-Lazyman/.lazymanrc ] && source ~/.config/nvim-Lazyman/.lazymanrc
+    # Source the Lazyman .nvimsbind for nvims key binding
+    # shellcheck source=.config/nvim-Lazyman/.nvimsbind
+    [ -f ~/.config/nvim-Lazyman/.nvimsbind ] && source ~/.config/nvim-Lazyman/.nvimsbind
+}
+
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#zprof
+
