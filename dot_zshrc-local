@@ -37,7 +37,12 @@ alias l='ls --group-directories-first'
 alias ll='ls -l --group-directories-first'
 alias la='ls -al --group-directories-first'
 
+alias gst='git status'
 alias gc='git commit -a --verbose -m'
+alias gu='git push'
+alias gd='git pull --no-rebase'
+alias gdr='git pull --rebase'
+alias gl='git log --all --decorate --oneline --graph'
 
 #-------------------------------------------------------------------------------
 export CALIBRE_USE_DARK_PALETTE=1
