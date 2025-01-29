@@ -2,7 +2,7 @@
 # specific to when my username is 'david'
 path+=('/home/david/.local/bin')
 path+=('/home/david/Apps')
-
+path+=('/usr/local/texlive/2024/bin/x86_64-linux')
 
 alias change_background='feh -r --randomize --no-fehbg --bg-fill $HOME/.wallpaper/active/*'
 alias cbg='feh -r --randomize --no-fehbg --bg-fill $HOME/.wallpaper/active/*'
