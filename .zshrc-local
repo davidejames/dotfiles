@@ -52,7 +52,20 @@ alias cbg='feh -r --randomize --no-fehbg --bg-fill $HOME/.wallpaper/active/*'
 # - `.dotfiles-local`
 # - `.dotfiles-private`
 #
+# Setup no showing of untracked files:
+# git --git-dir=$HOME/.dotfiles/ config --local status.showUntrackedFiles no
+# git --git-dir=$HOME/.dotfiles-private/ config --local status.showUntrackedFiles no
+#
+# Tip:
+# use `dtf commit -a` to quickly add files that you've changed
+#
 alias dtf='git --git-dir=$HOME/.dotfiles '
+alias dtfs='git --git-dir=$HOME/.dotfiles status'
+alias dtfc='git --git-dir=$HOME/.dotfiles commit -a'
+
+alias dtfp='git --git-dir=$HOME/.dotfiles-private '
+alias dtfps='git --git-dir=$HOME/.dotfiles-private status'
+alias dtfpc='git --git-dir=$HOME/.dotfiles-private commit -a'
 
 
 #┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
