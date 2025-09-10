@@ -1,0 +1,112 @@
+
+# specific to when my username is 'david'
+path+=('/home/david/.local/bin')
+path+=('/home/david/Apps')
+path=('/usr/local/texlive/2024/bin/x86_64-linux' $path)
+
+alias change_background='feh -r --randomize --no-fehbg --bg-fill $HOME/.wallpaper/active/*'
+alias cbg='feh -r --randomize --no-fehbg --bg-fill $HOME/.wallpaper/active/*'
+
+#┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Dotfiles
+# This setup is inspired from some sources I found that describe setting
+# up a dotfiles repo where your home directory IS the repo, but done in a way
+# to keep git from being too confused. This seems much simpler than competing
+# methods like chezmoi and the like. I did this setup on my work computer and
+# it has been very smooth.
+#
+# https://www.bowmanjd.com/dotfiles/dotfiles-2-bare-repo/
+# Commands from the above source:
+#┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# git clone --bare $REPO $HOME/.dotfiles
+# git --git-dir=$HOME/.dotfiles/ config --local status.showUntrackedFiles no
+#
+# If non-default branch in repo, or naming the initial branch before first push:
+# git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME switch -c base
+#
+# If first-time push to empty repo, add and commit some files, then push
+# Just adding ".profile" in the following example
+# git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME add .profile
+# git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME commit -m "initial commit"
+# git --git-dir=$HOME/.dotfiles/ push -u origin base
+#
+# If instead pulling an already populated repo, simply:
+# dtf checkout
+# Deal with conflicting files, or run again with -f flag if you are OK with
+# overwriting
+#┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# I didn't use this setup exactly, but leaving it here for future reference
+#
+# The things that make this work well are the following:
+# - the git dir is not `.git`, but `.dotfiles` keeps git from getting confused
+#   thinking that other repos you have are inside a repo and trying to treat
+#   then as submodules
+#   - making an alias to use that includes the setting for telling git which
+#     folder to use instead of `.git` makes this work really well
+# - setting `showUntrackedFiles` to `no` makes it so you need to explicitly
+#   add each file to the repo once, then it will track changes to those files
+#   you've told it to track.
+#
+# These methods even work for mutiple dotfiles repos such as:
+# - `.dotfiles`
+# - `.dotfiles-local`
+# - `.dotfiles-private`
+#
+alias dtf='git --git-dir=$HOME/.dotfiles '
+
+
+#┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Games
+alias FTB='~/FTBA/FTBApp'
+alias ftb='~/FTBA/FTBApp'
+
+
+#┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# VPN Control
+#
+alias vpnc='sudo protonvpn c --cc US'
+alias vpns='sudo protonvpn c --sc'
+alias vpnd='sudo protonvpn d'
+alias vpnstat='protonvpn s'
+alias vpnst='vpnstat'
+
+#┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+#┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Some useful aliases on my main machine
+alias update='sudo apt-get -y update; sudo apt-get -y upgrade'
+
+#┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Generally Useful Aliases
+#   note - some of these are provided by plugins above, but those
+#   versions do not sort directories first, so I'm re-defining them here
+alias l='ls --group-directories-first'
+alias ll='ls -l --group-directories-first'
+alias la='ls -al --group-directories-first'
+
+alias gst='git status'
+alias gc='git commit -a --verbose -m'
+alias gu='git push'
+alias gd='git pull --no-rebase'
+alias gdr='git pull --rebase'
+alias gl='git log --all --decorate --oneline --graph'
+
+
+#┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Alias for ansible
+alias ansible='podman run --rm -it ansible-container ansible'
+
+# Alias for ansible-playbook
+alias ansible-playbook='podman run --rm -it ansible-container ansible-playbook'
+
+# Alias for ansible-galaxy
+alias ansible-galaxy='podman run --rm -it ansible-container ansible-galaxy'
+
+# General alias for any ansible command
+alias ansible-command='podman run --rm -it ansible-container ansible "$@"'
+
+
+#┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+export CALIBRE_USE_DARK_PALETTE=1
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
