@@ -109,16 +109,16 @@ alias gl='git log --all --decorate --oneline --graph'
 
 #┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # Alias for ansible
-alias ansible='podman run --rm -it ansible-container ansible'
+#alias ansible='podman run --rm -it ansible-container ansible'
 
 # Alias for ansible-playbook
-alias ansible-playbook='podman run --rm -it ansible-container ansible-playbook'
+#alias ansible-playbook='podman run --rm -it ansible-container ansible-playbook'
 
 # Alias for ansible-galaxy
-alias ansible-galaxy='podman run --rm -it ansible-container ansible-galaxy'
+#alias ansible-galaxy='podman run --rm -it ansible-container ansible-galaxy'
 
 # General alias for any ansible command
-alias ansible-command='podman run --rm -it ansible-container ansible "$@"'
+#alias ansible-command='podman run --rm -it ansible-container ansible "$@"'
 
 
 #┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
